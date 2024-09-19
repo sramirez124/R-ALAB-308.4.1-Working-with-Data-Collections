@@ -3,11 +3,22 @@ const csv = "ID,Name,Occupation,Age\n42,Bruce,Knight,41\n57,Bob,Fry Cook,19\n63,
 let cells = [];
 let currentCell = 0;
 let columns = 0;
+let currentRow = 0;
+
+function resetVars(){
+    cells = [];
+    currentCell = 0;
+}
 
 // Part 2: Expanding Functionality
 for (let i = 0; i < csv.length; i++) {
     // checking for a new cell
     if(csv[i] === " , "){
+        if (currentRow === 0){
+            resetVars();
+            currentRow++;
+            continue;
+        }
         currentCell++;
         continue;
     }
@@ -32,4 +43,5 @@ for (let i = 0; i < csv.length; i++) {
         console.log(cells.toString());
     }
 }
+console.log(columns);
 
