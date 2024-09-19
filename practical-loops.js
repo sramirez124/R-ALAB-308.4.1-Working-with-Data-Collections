@@ -4,6 +4,7 @@ let cells = [];
 let currentCell = 0;
 let columns = 0;
 let currentRow = 0;
+let table = [];
 
 function resetVars(){
     cells = [];
@@ -15,33 +16,42 @@ for (let i = 0; i < csv.length; i++) {
     // checking for a new cell
     if(csv[i] === " , "){
         if (currentRow === 0){
-            resetVars();
-            currentRow++;
-            continue;
+            columns++;
         }
         currentCell++;
         continue;
     }
 
     // checking for a new row
-    if (csv[i] === " \n "){
-        cells = [];
-        currentCell = 0;
+    if (csv[i] === "\n"){
+        resetVars();
+        currentRow++;
         continue;
     }
+    // // Part 1 Code
+    // if (cells[currentCell]){
+    // cells[currentCell] += csv[i];
+    // } else {
+    //     cells[currentCell] = csv[i];
+    // }
 
-    if (cells[currentCell]){
-    cells[currentCell] += csv[i];
+    // Part 2 Code
+    if (table[currentRow] === undefined){
+        table[currentRow] = [];
+    }
+
+    if (table[currentRow][currentCell]){
+        table[currentRow][currentCell] += csv[i];
     } else {
-        cells[currentCell] = csv[i];
+        table[currentRow][currentCell] = csv[i];
     }
 
-    if(
-        (currentCell === 3 && csv[i + 1] === '\n') ||
-        i + 1 === csv.length
-    ){
-        console.log(cells.toString());
-    }
+    // if(
+    //     (currentCell === columns && csv[i + 1] === '\n') ||
+    //     i + 1 === csv.length
+    // ){
+    //     console.log(cells.toString());
+    // }
 }
-console.log(columns);
+console.log(table);
 
